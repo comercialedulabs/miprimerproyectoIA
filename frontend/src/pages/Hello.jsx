@@ -16,7 +16,14 @@ export default function Hello() {
     const parsedUser = JSON.parse(stored)
     setUser(parsedUser)
 
-    // Fetch the protected greeting from the backend
+    // --- MOCK MESSAGE FOR DEMO ---
+    // Simulating the backend response so it works as a static demo.
+    setTimeout(() => {
+      setMessage(`¡Hola Mundo, ${parsedUser.name}! (Modo Demo)`)
+      setLoadingMsg(false)
+    }, 500)
+
+    /* Original code for real backend:
     fetch('http://localhost:8000/api/hello', {
       headers: { Authorization: `Bearer ${parsedUser.email}` },
     })
@@ -28,6 +35,7 @@ export default function Hello() {
         setMessage(`Hola Mundo, ${parsedUser.name}!`)
       })
       .finally(() => setLoadingMsg(false))
+    */
   }, [navigate])
 
   function handleLogout() {

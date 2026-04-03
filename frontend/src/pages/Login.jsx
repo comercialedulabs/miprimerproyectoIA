@@ -20,6 +20,22 @@ export default function Login() {
     setLoading(true)
     setError('')
     try {
+      // --- MOCK LOGIN FOR DEMO ---
+      // Instead of fetching from localhost, we simulate a successful response
+      // This allows the demo to work on GitHub Pages without a real backend.
+      
+      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network delay
+      
+      const mockUser = {
+        email: 'usuario@gmail.com',
+        name: 'Usuario Demo',
+        picture: 'https://ui-avatars.com/api/?name=Usuario+Demo&background=4285F4&color=fff&size=128'
+      };
+
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      navigate('/dashboard');
+      
+      /* Original code for real backend:
       const response = await fetch('http://localhost:8000/api/auth/google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,6 +48,7 @@ export default function Login() {
       } else {
         setError('No se pudo autenticar. Intenta de nuevo.')
       }
+      */
     } catch (err) {
       setError('Error al conectar con el servidor. Verifica que el backend esté corriendo.')
     } finally {
